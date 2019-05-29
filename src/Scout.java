@@ -12,7 +12,7 @@ public class Scout extends Movable{
 //		Camera.getInstance().followSprite(this);
 	}
 	
-	public void update(Input input, int delta, Map map) {	
+	public void update(Input input, int delta) {	
 		// If the mouse button is being clicked, set the target to the cursor location
 //		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 //			this.setTargetX(Camera.getInstance().screenXToGlobalX(input.getMouseX()));
@@ -20,7 +20,7 @@ public class Scout extends Movable{
 //		}
 		
 		// If we're close to our target, reset to our current position
-		move(map, delta, SPEED);
+		move(delta, SPEED);
 	}
 	
 	

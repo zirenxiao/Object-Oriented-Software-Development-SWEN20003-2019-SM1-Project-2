@@ -8,12 +8,12 @@ public class MetalMine extends Resources {
 
 	public MetalMine(double x, double y) throws SlickException {
 		super(PATH, x, y);
-
+		this.setCurrentAmount(500);
 	}
 
 
 	@Override
-	public void update(Input input, int delta, Map map) {
+	public void update(Input input, int delta) {
 		// TODO Auto-generated method stub
 		
 	}

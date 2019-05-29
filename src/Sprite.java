@@ -22,6 +22,12 @@ public abstract class Sprite {
 		this.image.drawCentered(screenX, screenY);
 	}
 	
+	public void drawString(Graphics g, String s) {
+		int screenX = (int)Camera.getInstance().globalXToScreenX(x);
+		int screenY = (int)Camera.getInstance().globalYToScreenY(y);
+		g.drawString(s, screenX, screenY);
+	}
+	
 	public double getX() {
 		return x;
 	}
@@ -42,6 +48,6 @@ public abstract class Sprite {
 		this.drawImage((int)this.getX(), (int)this.getY());
 	}
 	
-	public abstract void update(Input input, int delta, Map map);
+	public abstract void update(Input input, int delta);
 	
 }

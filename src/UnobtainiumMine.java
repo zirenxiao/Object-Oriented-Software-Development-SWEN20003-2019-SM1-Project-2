@@ -9,10 +9,11 @@ public class UnobtainiumMine extends Resources {
 	public UnobtainiumMine(double x, double y) throws SlickException {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
+		this.setCurrentAmount(50);
 	}
 
 	@Override
-	public void update(Input input, int delta, Map map) {
+	public void update(Input input, int delta) {
 		// TODO Auto-generated method stub
 		
 	}

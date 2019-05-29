@@ -43,16 +43,16 @@ public class Camera {
 		return y + this.y;
 	}
 	
-	public void update(Map map) {
+	public void update() {
 		if (target == null) {
 			return;
 		}
 		double targetX = target.getX() - App.WINDOW_WIDTH / 2;
 		double targetY = target.getY() - App.WINDOW_HEIGHT / 2;
 		
-		x = Math.min(targetX, map.getMapWidth() - App.WINDOW_WIDTH);
+		x = Math.min(targetX, World.getInstance().getMap().getMapWidth() - App.WINDOW_WIDTH);
 		x = Math.max(x, 0);
-		y = Math.min(targetY, map.getMapHeight() - App.WINDOW_HEIGHT);
+		y = Math.min(targetY, World.getInstance().getMap().getMapHeight() - App.WINDOW_HEIGHT);
 		y = Math.max(y, 0);
 	}
 }

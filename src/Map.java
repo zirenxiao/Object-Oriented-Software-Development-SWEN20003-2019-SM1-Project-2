@@ -95,10 +95,12 @@ public class Map {
 	
 	public void update(Input input, int delta) {
 		boolean pressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
-		for (Sprite s:units) {
+		for (int i=0; i<units.size(); i++) {
+			Sprite s = units.get(i);
 			double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
 			double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
 			
+			// select and move
 			if (pressed && (s instanceof Movable)) {
 				
 				if (((Movable) s).isSelected()) {
@@ -106,13 +108,45 @@ public class Map {
 					((Movable) s).setTargetY(globalY);
 				}
 				
-				if ((Math.abs(globalX - s.getX()) <= 32) && (Math.abs(globalY - s.getY()) <=32)) {
+				if (withInDistance(globalX, s.getX(), globalY, s.getY(), 32)) {
 					((Movable) s).setSelect();
 				}
 				
 			}
 			
-			s.update(input, delta, this);
+			// mine resources && submit resources
+			for (Sprite other:units) {
+				if ((other instanceof Resources) && (s instanceof Engineer)) {
+					if (withInDistance(other.getX(), s.getX(), other.getY(), s.getY(), 32)) {
+						((Engineer) s).mine((Resources) other, delta);
+					}
+				}
+				if ((other instanceof CommandCentre) && (s instanceof Engineer)) {
+					
+				}
+			}
+		
+			
+			// remove resources if empty
+			if (s instanceof Resources) {
+				if (((Resources) s).getCurrentAmount() <= 0) {
+					units.remove(i);
+				}
+			}
+			
+			
+			
+			s.update(input, delta);
 		}
 	}
+	
+	private boolean withInDistance(double x1, double x2, double y1, double y2, int d) {
+		return (Math.abs(x1 - x2) <= d) && (Math.abs(y1 - y2) <=d);
+	}
+
+	public ArrayList<Sprite> getUnits() {
+		return units;
+	}
+	
+	
 }

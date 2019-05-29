@@ -9,7 +9,7 @@ public class Builder extends Movable {
 	}
 
 	@Override
-	public void update(Input input, int delta, Map map) {
+	public void update(Input input, int delta) {
 		// TODO Auto-generated method stub
 
 	}

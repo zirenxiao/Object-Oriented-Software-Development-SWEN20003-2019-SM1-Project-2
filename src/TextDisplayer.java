@@ -21,7 +21,7 @@ public class TextDisplayer {
 	}
 	
 	public void render(Graphics g) {
-		g.drawString("Metal: "+amountMetal+"\nUnobtainium: "+amountUnobtainium, 32, 32);
+		g.drawString("Metal: "+World.getInstance().getCurrentCarryMetal()+"\nUnobtainium: "+World.getInstance().getCurrentCarryUnobtainium(), 32, 32);
 		g.drawString("Your Position "+Math.round(playerX)+", "+Math.round(playerY), 32, 700);
 	}
 	

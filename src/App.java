@@ -26,7 +26,7 @@ public class App extends BasicGame {
     @Override
     public void init(GameContainer gc)
             throws SlickException {
-        world = new World();
+        world = World.getInstance();
     }
 
     /** Update the game state for a frame.
