@@ -8,6 +8,7 @@ public abstract class Sprite {
 	private Image image;
 	private double x;
 	private double y;
+
 	
 	public Sprite(String path, double x, double y) throws SlickException {
 		super();
@@ -16,10 +17,30 @@ public abstract class Sprite {
 		this.y = y;
 	}
 	
+	/** Draw self image at the point X, Y
+	 * @param x
+	 * @param y
+	 */
 	public void drawImage(int x, int y) {
+		drawImage(x, y, this.image);
+	}
+	
+	/** Draw an image on the same X, Y
+	 * @param image
+	 */
+	public void drawImage(Image image) {
+		drawImage((int) this.getX(), (int) this.getY(), image);
+	}
+	
+	/** Draw an image at point x, y
+	 * @param x
+	 * @param y
+	 * @param image
+	 */
+	public void drawImage(double x, double y, Image image) {
 		int screenX = (int)Camera.getInstance().globalXToScreenX(x);
 		int screenY = (int)Camera.getInstance().globalYToScreenY(y);
-		this.image.drawCentered(screenX, screenY);
+		image.drawCentered(screenX, screenY);
 	}
 	
 	public void drawString(Graphics g, String s) {

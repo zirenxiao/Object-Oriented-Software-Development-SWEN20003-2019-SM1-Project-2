@@ -17,6 +17,7 @@ public class Map {
 	private TiledMap map;
 	private ArrayList<Sprite> units;
 	
+	
 	public Map() throws SlickException {
 		// construct background
 		map = new TiledMap(MAP_PATH);
@@ -93,25 +94,39 @@ public class Map {
 		}
 	}
 	
+	private boolean selectObject(double mouseX, double mouseY) {
+		for (Sprite s:units) {
+			if (!(s instanceof Selectable)) {
+				continue;
+			}
+			if (withInDistance(mouseX, s.getX(), mouseY, s.getY(), 32)) {
+				((Selectable) s).setSelect();
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void update(Input input, int delta) {
 		boolean pressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
+		double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
+		double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
+		boolean newSelect = false;
+		
+		// check if there is any object in the selection distance
+		if (pressed) {
+			newSelect = selectObject(globalX, globalY);
+		}
+		
 		for (int i=0; i<units.size(); i++) {
 			Sprite s = units.get(i);
-			double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
-			double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
-			
+
 			// select and move
 			if (pressed && (s instanceof Movable)) {
-				
-				if (((Movable) s).isSelected()) {
+				if (((Movable) s).isSelected() && !newSelect) {
 					((Movable) s).setTargetX(globalX);
 					((Movable) s).setTargetY(globalY);
 				}
-				
-				if (withInDistance(globalX, s.getX(), globalY, s.getY(), 32)) {
-					((Movable) s).setSelect();
-				}
-				
 			}
 			
 			// mine resources && submit resources

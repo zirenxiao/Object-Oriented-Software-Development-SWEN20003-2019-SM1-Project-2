@@ -17,12 +17,15 @@ public class Engineer extends Movable {
 	
 	private boolean goToSubmit = false;
 	
+	private CommandCentre c = null;
+	
 	public Engineer(double x, double y) throws SlickException {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 		maxCarry = 2;
 		currentCarryMetal = 0;
 		currentCarryUnobtainium = 0;
+		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
 	}
 
 	@Override
@@ -30,10 +33,18 @@ public class Engineer extends Movable {
 		// TODO Auto-generated method stub
 		move(delta, SPEED);
 		if (goToSubmit && closeToObject(SPEED)) {
-			submitResources();
-			goToSubmit = false;
-			this.setTargetX(mineX);
-			this.setTargetY(mineY);
+			if (closeToObject(SPEED, c.getX(), c.getY())) {
+				// this is the case that is close to
+				// the real target, instead of reset
+				// target
+				submitResources();
+				goToSubmit = false;
+				this.setTargetX(mineX);
+				this.setTargetY(mineY);
+			}else {
+				// stun action
+			}
+			
 		}
 	}
 	
@@ -88,7 +99,6 @@ public class Engineer extends Movable {
 	
 	private void findNearestCommandCentre() {
 		double smallestDist = Integer.MAX_VALUE;
-		CommandCentre c = null;
 		for (Sprite s:World.getInstance().getMap().getUnits()) {
 			if (s instanceof CommandCentre) {
 				double d = this.distance(getX(), getY(), s.getX(), s.getY());

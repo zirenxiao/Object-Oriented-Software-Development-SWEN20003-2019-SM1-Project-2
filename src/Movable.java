@@ -1,15 +1,17 @@
 import org.newdawn.slick.SlickException;
 
-public abstract class Movable extends Sprite {
+public abstract class Movable extends Selectable {
 	
 	private double targetX;
 	private double targetY;
-	private boolean selected = false;
+	private static final String SELECT_PATH = "assets/highlight.png";
+	
 
 	public Movable(String path, double x, double y) throws SlickException {
 		super(path, x, y);
 		this.targetX = this.getX();
 		this.targetY = this.getY();
+		this.setSelectActiveImagePath(SELECT_PATH);
 	}
 
 	public double getTargetX() {
@@ -36,18 +38,6 @@ public abstract class Movable extends Sprite {
 	public double distance(double x1, double y1, double x2, double y2) {
 		return (double)Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
-	
-	public void setSelect() {
-		Camera.getInstance().followSprite(this);
-	}
-	
-	public boolean isSelected() {
-		return selected;
-	}
-
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
 
 	public void move(int delta, double speed) {
 		if (this.closeToObject(speed)) {
@@ -69,6 +59,10 @@ public abstract class Movable extends Sprite {
 	
 	public boolean closeToObject(double speed) {
 		return distance(this.getX(), this.getY(), this.getTargetX(), this.getTargetY()) <= speed;
+	}
+	
+	public boolean closeToObject(double speed, double x, double y) {
+		return distance(this.getX(), this.getY(), x, y) <= speed;
 	}
 	
 

@@ -7,7 +7,7 @@
 public class Camera {
 	private double x = 300;
 	private double y = 300;
-	private Movable target = null;
+	private Selectable target = null;
 	private static Camera camera = null;
 	
 	private Camera() {
@@ -21,7 +21,7 @@ public class Camera {
 		return camera;
 	}
 	
-	public void followSprite(Movable target) {
+	public void followSprite(Selectable target) {
 		if (this.target!=null) {
 			this.target.setSelected(false);
 		}
