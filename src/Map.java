@@ -50,7 +50,6 @@ public class Map {
 		        	units.add(new Engineer(intx, inty));
 		        }
 		    }
-		    units.add(new Scout());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,9 +57,6 @@ public class Map {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -95,14 +91,24 @@ public class Map {
 	}
 	
 	private boolean selectObject(double mouseX, double mouseY) {
+		Selectable temp = null;
 		for (Sprite s:units) {
 			if (!(s instanceof Selectable)) {
 				continue;
 			}
 			if (withInDistance(mouseX, s.getX(), mouseY, s.getY(), 32)) {
-				((Selectable) s).setSelect();
-				return true;
+				// movable units have higher priority
+				if (s instanceof Buildings) {
+					temp = (Selectable) s;
+				}else if (s instanceof Movable) {
+					((Selectable) s).setSelect();
+					return true;
+				}
 			}
+		}
+		if (temp != null) {
+			temp.setSelect();
+			return true;
 		}
 		return false;
 	}
@@ -161,6 +167,10 @@ public class Map {
 
 	public ArrayList<Sprite> getUnits() {
 		return units;
+	}
+	
+	public void addUnit(Sprite s) {
+		units.add(s);
 	}
 	
 	

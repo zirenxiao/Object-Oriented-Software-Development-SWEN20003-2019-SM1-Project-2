@@ -1,5 +1,3 @@
-import org.newdawn.slick.SlickException;
-
 public abstract class Movable extends Selectable {
 	
 	private double targetX;
@@ -7,7 +5,7 @@ public abstract class Movable extends Selectable {
 	private static final String SELECT_PATH = "assets/highlight.png";
 	
 
-	public Movable(String path, double x, double y) throws SlickException {
+	public Movable(String path, double x, double y) {
 		super(path, x, y);
 		this.targetX = this.getX();
 		this.targetY = this.getY();

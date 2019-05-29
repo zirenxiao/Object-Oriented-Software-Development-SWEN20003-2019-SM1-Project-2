@@ -1,6 +1,5 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
 public class Engineer extends Movable {
 	private static final String PATH = "assets/units/engineer.png";
@@ -19,13 +18,13 @@ public class Engineer extends Movable {
 	
 	private CommandCentre c = null;
 	
-	public Engineer(double x, double y) throws SlickException {
+	public Engineer(double x, double y) {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 		maxCarry = 2;
 		currentCarryMetal = 0;
 		currentCarryUnobtainium = 0;
-		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
+//		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
 	}
 
 	@Override
@@ -44,7 +43,6 @@ public class Engineer extends Movable {
 			}else {
 				// stun action
 			}
-			
 		}
 	}
 	
@@ -86,8 +84,8 @@ public class Engineer extends Movable {
 	
 	private void submitResources() {
 		World world = World.getInstance();
-		world.setCurrentCarryMetal(world.getCurrentCarryMetal() + currentCarryMetal);
-		world.setCurrentCarryUnobtainium(world.getCurrentCarryUnobtainium() + currentCarryUnobtainium);
+		world.addCurrentCarryMetal(currentCarryMetal);
+		world.addCurrentCarryUnobtainium(currentCarryUnobtainium);
 		currentCarryMetal = 0;
 		currentCarryUnobtainium = 0;
 	}

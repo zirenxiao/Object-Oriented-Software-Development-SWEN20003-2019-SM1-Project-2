@@ -27,7 +27,7 @@ public class World {
 		}
 		camera = Camera.getInstance();
 		textDisplay = TextDisplayer.getInstance();
-		currentCarryMetal = 0;
+		currentCarryMetal = 999;
 		currentCarryUnobtainium = 0;
 	}
 	
@@ -58,17 +58,39 @@ public class World {
 		return currentCarryMetal;
 	}
 
-	public void setCurrentCarryMetal(int currentCarryMetal) {
-		this.currentCarryMetal = currentCarryMetal;
+	public boolean costCurrentCarryMetal(int cost) {
+		if (currentCarryMetal - cost >= 0) {
+			currentCarryMetal = currentCarryMetal - cost;
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	public boolean costCurrentCarryUnobtainium(int cost) {
+		if (currentCarryUnobtainium - cost  >= 0) {
+			currentCarryUnobtainium = currentCarryUnobtainium - cost;
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	public void addCurrentCarryMetal(int add) {
+		currentCarryMetal = currentCarryMetal + add;
+	}
+	
+	public void addCurrentCarryUnobtainium(int add) {
+		currentCarryUnobtainium = currentCarryUnobtainium + add;
 	}
 
 	public int getCurrentCarryUnobtainium() {
 		return currentCarryUnobtainium;
 	}
 
-	public void setCurrentCarryUnobtainium(int currentCarryUnobtainium) {
-		this.currentCarryUnobtainium = currentCarryUnobtainium;
-	}
+	
 	
 	
 	

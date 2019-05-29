@@ -5,7 +5,7 @@ public abstract class Resources extends Sprite {
 	
 	private int currentAmount;
 
-	public Resources(String path, double x, double y) throws SlickException {
+	public Resources(String path, double x, double y) {
 		super(path, x, y);
 	}
 

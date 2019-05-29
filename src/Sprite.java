@@ -10,9 +10,14 @@ public abstract class Sprite {
 	private double y;
 
 	
-	public Sprite(String path, double x, double y) throws SlickException {
+	public Sprite(String path, double x, double y) {
 		super();
-		image = new Image(path);
+		try {
+			image = new Image(path);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.x = x;
 		this.y = y;
 	}
@@ -70,5 +75,5 @@ public abstract class Sprite {
 	}
 	
 	public abstract void update(Input input, int delta);
-	
+
 }

@@ -6,7 +6,7 @@ public class UnobtainiumMine extends Resources {
 	private static final String PATH = "assets/resources/unobtainium_mine.png";
 
 
-	public UnobtainiumMine(double x, double y) throws SlickException {
+	public UnobtainiumMine(double x, double y) {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 		this.setCurrentAmount(50);

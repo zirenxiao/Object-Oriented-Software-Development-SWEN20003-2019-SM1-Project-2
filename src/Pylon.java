@@ -6,7 +6,7 @@ public class Pylon extends Buildings {
 
 	private static final String PATH = "assets/buildings/pylon.png";
 	
-	public Pylon(double x, double y) throws SlickException {
+	public Pylon(double x, double y) {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 		

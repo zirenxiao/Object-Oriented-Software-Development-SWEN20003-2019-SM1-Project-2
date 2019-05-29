@@ -8,7 +8,7 @@ public abstract class Selectable extends Sprite {
 	private Image selectActive;
 	private String selectOption = null;
 
-	public Selectable(String path, double x, double y) throws SlickException {
+	public Selectable(String path, double x, double y) {
 		super(path, x, y);
 	}
 	
@@ -46,6 +46,7 @@ public abstract class Selectable extends Sprite {
 			this.drawImage(selectActive);
 		}
 		super.render(g);
-		
 	}
+	
+	
 }
