@@ -1,10 +1,16 @@
 import org.newdawn.slick.Graphics;
 
+/** A text displayer can show messages on the screen
+ *
+ */
 public class TextDisplayer {
 	
 	private static TextDisplayer td = null;
 	
 	private String selectOption = null;
+	
+	private static final int RESOURCES_POSITION = 32;
+	private static final int SELECT_OPTION_Y = 100;
 	
 	private TextDisplayer() {
 
@@ -18,9 +24,13 @@ public class TextDisplayer {
 	}
 	
 	public void render(Graphics g) {
-		g.drawString("Metal: "+World.getInstance().getCurrentCarryMetal()+"\nUnobtainium: "+World.getInstance().getCurrentCarryUnobtainium(), 32, 32);
+		g.drawString("Metal: "
+				+ World.getInstance().getMetal()
+				+ "\nUnobtainium: "
+				+ World.getInstance().getUnobtainium(),
+				RESOURCES_POSITION, RESOURCES_POSITION);
 		if (selectOption != null) {
-			g.drawString(selectOption, 32, 100);
+			g.drawString(selectOption, RESOURCES_POSITION, SELECT_OPTION_Y);
 		}
 	}
 

@@ -1,5 +1,7 @@
 import org.newdawn.slick.Input;
 
+/** A command centre can train 3 types of sprite
+ */
 public class CommandCentre extends Buildings {
 	
 	private static final String PATH = "assets/buildings/command_centre.png";
@@ -9,6 +11,11 @@ public class CommandCentre extends Buildings {
 		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
 	}
 
+	/** Key 1 - Scout
+	 * Key 2 - Builder
+	 * Key 3 - Engineer
+	 *
+	 */
 	@Override
 	public void update(Input input, int delta) {
 		// TODO Auto-generated method stub

@@ -2,6 +2,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+/** A selectable object can be selected by left-click
+ *
+ */
 public abstract class Selectable extends Sprite {
 	
 	private boolean selected = false;
@@ -20,6 +23,9 @@ public abstract class Selectable extends Sprite {
 		}
 	}
 	
+	/** Let the camera follow the target
+	 * 
+	 */
 	public void setSelect() {
 		Camera.getInstance().followSprite(this);
 	}
@@ -28,6 +34,9 @@ public abstract class Selectable extends Sprite {
 		return selected;
 	}
 
+	/** Set select status and print options
+	 * @param selected
+	 */
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 		if (selectOption != null && selected) {
@@ -37,6 +46,9 @@ public abstract class Selectable extends Sprite {
 		}
 	}
 	
+	/** Set options text after selected
+	 * @param selectOption
+	 */
 	public void setSelectOption(String selectOption) {
 		this.selectOption = selectOption;
 	}

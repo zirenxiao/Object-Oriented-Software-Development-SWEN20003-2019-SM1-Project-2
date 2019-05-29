@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Input;
 
+/** A train handler can handler the training tasks.
+ * It will add each training task into a queue and
+ * train it sequentially.
+ */
 public class TrainHandler {
 	
 	private ArrayList<Sprite> trainQueue;
@@ -12,28 +16,40 @@ public class TrainHandler {
 	
 	public static final int NOT_TRAINING = -1;
 
+	/** Construct the handler with a certain training
+	 * time
+	 * @param trainTime
+	 */
 	public TrainHandler(int trainTime) {
-		// TODO Auto-generated constructor stub
 		trainQueue = new ArrayList<Sprite>();
 		trainTimer = 0;
 		this.trainTime = trainTime;
 	}
 	
+	/** Handle a training request
+	 * @param input
+	 * @param key
+	 * @param generate
+	 * @param cost
+	 * @param costType
+	 */
 	public void handle(Input input, int key, Sprite generate, int cost, ResourcesType costType) {
 		if (input.isKeyPressed(key)) {
 			boolean costSuccess = false;
 			if (costType == ResourcesType.METAL) {
-				costSuccess = World.getInstance().costCurrentCarryMetal(cost);
+				costSuccess = World.getInstance().costMetal(cost);
 			}else if (costType == ResourcesType.UNOBTAINIUM) {
-				costSuccess = World.getInstance().costCurrentCarryUnobtainium(cost);
+				costSuccess = World.getInstance().costUnobtainium(cost);
 			}
 			if (costSuccess) {
 				trainQueue.add(generate);
-//				World.getInstance().getMap().addUnit(generate);
 			}
 		}
 	}
 	
+	/** Action of time pass each delta
+	 * @param delta
+	 */
 	public void timePass(int delta) {
 		if (trainQueue.isEmpty()) {
 			return;
@@ -46,6 +62,9 @@ public class TrainHandler {
 		}
 	}
 	
+	/** Get remaining training time
+	 * @return
+	 */
 	public int getTrainRemainTime() {
 		if (trainQueue.isEmpty()) {
 			return NOT_TRAINING;
@@ -54,6 +73,9 @@ public class TrainHandler {
 		}
 	}
 	
+	/** Get total training number
+	 * @return
+	 */
 	public int getTrainNumber() {
 		return trainQueue.size();
 	}

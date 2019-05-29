@@ -1,6 +1,9 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
+/** Buildable objects are able to build other sprites
+ *
+ */
 public class Buildable extends Movable {
 
 	private TrainHandler th;
@@ -38,6 +41,9 @@ public class Buildable extends Movable {
 		return th;
 	}
 
+	/** Is currently building something?
+	 * @return
+	 */
 	public boolean isBuilding() {
 		return isBuilding;
 	}

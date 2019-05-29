@@ -1,5 +1,8 @@
 import org.newdawn.slick.Input;
 
+/** A factory can train trucks
+ *
+ */
 public class Factory extends Buildings {
 	
 	private static final String PATH = "assets/buildings/factory.png";

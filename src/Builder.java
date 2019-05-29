@@ -1,5 +1,7 @@
 import org.newdawn.slick.Input;
 
+/** A Builder can build a factory
+ */
 public class Builder extends Buildable {
 	private static final String PATH = "assets/units/builder.png";
 	private static final double SPEED = 0.1;

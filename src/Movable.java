@@ -1,3 +1,6 @@
+/** Movable objects can move through the map
+ *
+ */
 public abstract class Movable extends Selectable {
 	
 	private double targetX;
@@ -28,15 +31,29 @@ public abstract class Movable extends Selectable {
 		this.targetY = targetY;
 	}
 	
+	/** Reset the target position into current position
+	 * 
+	 */
 	public void resetTarget() {
 		targetX = this.getX();
 		targetY = this.getY();		
 	}
 	
+	/** Calculate distance between 2 points
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
 	public double distance(double x1, double y1, double x2, double y2) {
 		return (double)Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 	}
 
+	/** Move to the target
+	 * @param delta
+	 * @param speed
+	 */
 	public void move(int delta, double speed) {
 		if (this.closeToObject(speed)) {
 			resetTarget();
@@ -55,10 +72,20 @@ public abstract class Movable extends Selectable {
 		}
 	}
 	
+	/** If current position is close enough to the target
+	 * @param speed
+	 * @return
+	 */
 	public boolean closeToObject(double speed) {
 		return distance(this.getX(), this.getY(), this.getTargetX(), this.getTargetY()) <= speed;
 	}
 	
+	/** If current position is close enough to a point
+	 * @param speed
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean closeToObject(double speed, double x, double y) {
 		return distance(this.getX(), this.getY(), x, y) <= speed;
 	}

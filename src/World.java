@@ -16,8 +16,8 @@ public class World {
 	private TextDisplayer textDisplay;
 	private static World world = null;
 	
-	private int currentCarryMetal;
-	private int currentCarryUnobtainium;
+	private int collectedMetal;
+	private int collectedUnobtainium;
 	
 	private World() {
 		try {
@@ -27,10 +27,13 @@ public class World {
 		}
 		camera = Camera.getInstance();
 		textDisplay = TextDisplayer.getInstance();
-		currentCarryMetal = 999;
-		currentCarryUnobtainium = 0;
+		collectedMetal = 0;
+		collectedUnobtainium = 0;
 	}
 	
+	/** Get world's instance
+	 * @return
+	 */
 	public static World getInstance() {
 		if (world == null) {
 			world = new World();
@@ -54,40 +57,56 @@ public class World {
 		return map;
 	}
 
-	public int getCurrentCarryMetal() {
-		return currentCarryMetal;
+	/** Get total collected number of metal
+	 * @return
+	 */
+	public int getMetal() {
+		return collectedMetal;
 	}
 
-	public boolean costCurrentCarryMetal(int cost) {
-		if (currentCarryMetal - cost >= 0) {
-			currentCarryMetal = currentCarryMetal - cost;
+	/** Consume metal mine
+	 * @param cost
+	 * @return
+	 */
+	public boolean costMetal(int cost) {
+		if (collectedMetal - cost >= 0) {
+			collectedMetal = collectedMetal - cost;
 			return true;
 		}else {
 			return false;
 		}
 		
 	}
-	
-	public boolean costCurrentCarryUnobtainium(int cost) {
-		if (currentCarryUnobtainium - cost  >= 0) {
-			currentCarryUnobtainium = currentCarryUnobtainium - cost;
+	 
+	/** Consume unobtainium mine
+	 * @param cost
+	 * @return
+	 */
+	public boolean costUnobtainium(int cost) {
+		if (collectedUnobtainium - cost  >= 0) {
+			collectedUnobtainium = collectedUnobtainium - cost;
 			return true;
 		}else {
 			return false;
 		}
-		
 	}
 	
-	public void addCurrentCarryMetal(int add) {
-		currentCarryMetal = currentCarryMetal + add;
+	/** Add metal mine
+	 * @param add
+	 */
+	public void addMetal(int add) {
+		collectedMetal = collectedMetal + add;
 	}
 	
-	public void addCurrentCarryUnobtainium(int add) {
-		currentCarryUnobtainium = currentCarryUnobtainium + add;
+	/** Add unobtainium mine
+	 * @param add
+	 */
+	public void addUnobtainium(int add) {
+		collectedUnobtainium = collectedUnobtainium + add;
 	}
 
-	public int getCurrentCarryUnobtainium() {
-		return currentCarryUnobtainium;
+	public int getUnobtainium() {
+		return collectedUnobtainium;
 	}
 
 	

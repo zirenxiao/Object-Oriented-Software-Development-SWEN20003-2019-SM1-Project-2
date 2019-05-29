@@ -26,6 +26,9 @@ public class Map {
 		readFromCSV();
 	}
 	
+	/** Read map objects from a csv file
+	 * 
+	 */
 	private void readFromCSV() {
 		try (BufferedReader br = new BufferedReader(new FileReader(RESOURCES_PATH))) {
 		    String line;
@@ -62,6 +65,11 @@ public class Map {
 		}
 	}
 
+	/** Is the position can be accessed
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean isPositionFree(double x, double y) {
 		int tileId = map.getTileId(worldXToTileX(x), worldYToTileY(y), 0);
 		return !Boolean.parseBoolean(map.getTileProperty(tileId, SOLID_PROPERTY, "false"));
@@ -90,6 +98,12 @@ public class Map {
 		}
 	}
 	
+	/** Select an object if possible, return false if
+	 * there is nothing to select
+	 * @param mouseX
+	 * @param mouseY
+	 * @return
+	 */
 	private boolean selectObject(double mouseX, double mouseY) {
 		Selectable temp = null;
 		for (Sprite s:units) {
@@ -151,33 +165,47 @@ public class Map {
 					
 				}
 			}
-		
-			
+
 			// remove resources if empty
 			if (s instanceof Resources) {
 				if (((Resources) s).getCurrentAmount() <= 0) {
 					units.remove(i);
 				}
 			}
-			
-			
-			
+
 			s.update(input, delta);
 		}
 	}
 	
+	/** If a coordinate within a distance
+	 * @param x1
+	 * @param x2
+	 * @param y1
+	 * @param y2
+	 * @param d
+	 * @return
+	 */
 	private boolean withInDistance(double x1, double x2, double y1, double y2, int d) {
 		return (Math.abs(x1 - x2) <= d) && (Math.abs(y1 - y2) <=d);
 	}
 
+	/** Get all units array list
+	 * @return
+	 */
 	public ArrayList<Sprite> getUnits() {
 		return units;
 	}
 	
+	/** Add an unit into the array list
+	 * @param s
+	 */
 	public void addUnit(Sprite s) {
 		units.add(s);
 	}
 	
+	/** Remove an unit from the array list
+	 * @param s
+	 */
 	public void removeUnit(Sprite s) {
 		units.remove(s);
 	}

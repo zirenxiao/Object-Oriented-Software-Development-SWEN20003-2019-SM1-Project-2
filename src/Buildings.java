@@ -1,6 +1,8 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
+/** Buildings can train some sprites
+ */
 public abstract class Buildings extends Selectable {
 	
 	private static final String SELECT_PATH = "assets/highlight_large.png";

@@ -1,5 +1,9 @@
 import org.newdawn.slick.Input;
 
+/** A truck can build a command center, but it will be
+ * destroyed after building completed.
+ *
+ */
 public class Truck extends Buildable {
 	
 	private static final String PATH = "assets/units/truck.png";
