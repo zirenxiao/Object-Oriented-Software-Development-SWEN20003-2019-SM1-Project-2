@@ -1,12 +1,11 @@
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-public class Factory extends Buildings {
+public class Engineer extends Movable {
+	private static final String PATH = "assets/units/engineer.png";
+	private static final double SPEED = 0.1;
 	
-	private static final String PATH = "assets/buildings/factory.png";
-
-	public Factory(double x, double y) throws SlickException {
+	public Engineer(double x, double y) throws SlickException {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 	}
@@ -14,7 +13,7 @@ public class Factory extends Buildings {
 	@Override
 	public void update(Input input, int delta, Map map) {
 		// TODO Auto-generated method stub
-
+		move(map, delta, SPEED);
 	}
 
 }

@@ -7,7 +7,7 @@
 public class Camera {
 	private double x = 300;
 	private double y = 300;
-	private Sprite target;
+	private Movable target = null;
 	private static Camera camera = null;
 	
 	private Camera() {
@@ -21,7 +21,11 @@ public class Camera {
 		return camera;
 	}
 	
-	public void followSprite(Sprite target) {
+	public void followSprite(Movable target) {
+		if (this.target!=null) {
+			this.target.setSelected(false);
+		}
+		target.setSelected(true);
 		this.target = target;
 	}
 	
@@ -40,6 +44,9 @@ public class Camera {
 	}
 	
 	public void update(Map map) {
+		if (target == null) {
+			return;
+		}
 		double targetX = target.getX() - App.WINDOW_WIDTH / 2;
 		double targetY = target.getY() - App.WINDOW_HEIGHT / 2;
 		

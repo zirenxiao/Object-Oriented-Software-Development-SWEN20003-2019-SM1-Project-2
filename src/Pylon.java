@@ -1,4 +1,4 @@
-import org.newdawn.slick.Graphics;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -13,16 +13,9 @@ public class Pylon extends Buildings {
 	}
 
 	@Override
-	void render(Graphics g) {
+	public void update(Input input, int delta, Map map) {
 		// TODO Auto-generated method stub
-		this.drawImage((int)this.getX(), (int)this.getY());
-
-	}
-
-	@Override
-	void update(Input input, int delta, Map map) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 }

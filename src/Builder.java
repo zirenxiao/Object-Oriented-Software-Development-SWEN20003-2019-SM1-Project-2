@@ -1,12 +1,9 @@
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-public class Factory extends Buildings {
-	
-	private static final String PATH = "assets/buildings/factory.png";
-
-	public Factory(double x, double y) throws SlickException {
+public class Builder extends Movable {
+	private static final String PATH = "assets/units/builder.png";
+	public Builder(double x, double y) throws SlickException {
 		super(PATH, x, y);
 		// TODO Auto-generated constructor stub
 	}

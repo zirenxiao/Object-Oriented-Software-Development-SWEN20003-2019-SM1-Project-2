@@ -37,8 +37,11 @@ public abstract class Sprite {
 	public void setY(double y) {
 		this.y = y;
 	}
-
-	abstract void render(Graphics g);
-	abstract void update(Input input, int delta, Map map);
+	
+	public void render(Graphics g) {
+		this.drawImage((int)this.getX(), (int)this.getY());
+	}
+	
+	public abstract void update(Input input, int delta, Map map);
 	
 }

@@ -46,9 +46,10 @@ public class Map {
 		        }else if(name.equals("pylon")){
 		        	units.add(new Pylon(intx, inty));
 		        }else if(name.equals("engineer")){
-		        	units.add(new UnobtainiumMine(intx, inty));
+		        	units.add(new Engineer(intx, inty));
 		        }
 		    }
+		    units.add(new Scout());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,7 +94,24 @@ public class Map {
 	}
 	
 	public void update(Input input, int delta) {
+		boolean pressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
 		for (Sprite s:units) {
+			double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
+			double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
+			
+			if (pressed && (s instanceof Movable)) {
+				
+				if (((Movable) s).isSelected()) {
+					((Movable) s).setTargetX(globalX);
+					((Movable) s).setTargetY(globalY);
+				}
+				
+				if ((Math.abs(globalX - s.getX()) <= 32) && (Math.abs(globalY - s.getY()) <=32)) {
+					((Movable) s).setSelect();
+				}
+				
+			}
+			
 			s.update(input, delta, this);
 		}
 	}
