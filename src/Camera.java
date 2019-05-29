@@ -1,9 +1,3 @@
-/**
- * This class should be used to restrict the game's view to a subset of the entire world.
- * 
- * You are free to make ANY modifications you see fit.
- * These classes are provided simply as a starting point. You are not strictly required to use them.
- */
 public class Camera {
 	private double x = 300;
 	private double y = 300;
@@ -24,6 +18,9 @@ public class Camera {
 	public void followSprite(Selectable target) {
 		if (this.target!=null) {
 			this.target.setSelected(false);
+		}
+		if (target == null) {
+			return;
 		}
 		target.setSelected(true);
 		this.target = target;

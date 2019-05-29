@@ -109,18 +109,23 @@ public class Map {
 		if (temp != null) {
 			temp.setSelect();
 			return true;
+		}else {
+			// selected nothing, stop following
+			Camera.getInstance().followSprite(null);
+			return false;
 		}
-		return false;
+		
 	}
 	
 	public void update(Input input, int delta) {
-		boolean pressed = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
+		boolean pressedLeft = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
+		boolean pressedRight = input.isMousePressed(Input.MOUSE_RIGHT_BUTTON);
 		double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
 		double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
 		boolean newSelect = false;
 		
 		// check if there is any object in the selection distance
-		if (pressed) {
+		if (pressedLeft) {
 			newSelect = selectObject(globalX, globalY);
 		}
 		
@@ -128,7 +133,7 @@ public class Map {
 			Sprite s = units.get(i);
 
 			// select and move
-			if (pressed && (s instanceof Movable)) {
+			if (pressedRight && (s instanceof Movable)) {
 				if (((Movable) s).isSelected() && !newSelect) {
 					((Movable) s).setTargetX(globalX);
 					((Movable) s).setTargetY(globalY);
@@ -171,6 +176,10 @@ public class Map {
 	
 	public void addUnit(Sprite s) {
 		units.add(s);
+	}
+	
+	public void removeUnit(Sprite s) {
+		units.remove(s);
 	}
 	
 	

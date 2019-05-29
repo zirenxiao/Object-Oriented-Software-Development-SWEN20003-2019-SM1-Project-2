@@ -1,6 +1,5 @@
 
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
 public class Pylon extends Buildings {
 

@@ -3,11 +3,9 @@ import org.newdawn.slick.Input;
 public class CommandCentre extends Buildings {
 	
 	private static final String PATH = "assets/buildings/command_centre.png";
-	private static final String SELECT_PATH = "assets/highlight_large.png";
 
 	public CommandCentre(double x, double y) {
 		super(PATH, x, y);
-		this.setSelectActiveImagePath(SELECT_PATH);
 		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
 	}
 

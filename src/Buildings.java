@@ -3,7 +3,7 @@ import org.newdawn.slick.Input;
 
 public abstract class Buildings extends Selectable {
 	
-	private static final String SELECT_PATH = "assets/highlight.png";
+	private static final String SELECT_PATH = "assets/highlight_large.png";
 	private static final int CONSTRUCT_TIME = 5000;
 	
 	private TrainHandler th;

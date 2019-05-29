@@ -1,5 +1,4 @@
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
 
 public abstract class Resources extends Sprite {
 	
