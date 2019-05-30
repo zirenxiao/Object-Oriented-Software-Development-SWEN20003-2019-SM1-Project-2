@@ -22,6 +22,18 @@ public abstract class Sprite {
 		this.y = y;
 	}
 	
+	/** Set a new image
+	 * @param image
+	 */
+	public void setImage(String path) {
+		try {
+			image = new Image(path);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/** Draw self image at the point X, Y
 	 * @param x
 	 * @param y
@@ -48,6 +60,10 @@ public abstract class Sprite {
 		image.drawCentered(screenX, screenY);
 	}
 	
+	/** Draw a string on the image
+	 * @param g
+	 * @param s
+	 */
 	public void drawString(Graphics g, String s) {
 		int screenX = (int)Camera.getInstance().globalXToScreenX(x);
 		int screenY = (int)Camera.getInstance().globalYToScreenY(y);

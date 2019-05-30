@@ -14,6 +14,8 @@ public class Map {
 	private static final String RESOURCES_PATH = "assets/objects.csv";
 	private static final String SOLID_PROPERTY = "solid";
 	private static final String COMMA_DELIMITER = ",";
+	private static final int DISTANCE_THRESHOLD = 32;
+	private static final int CHEAT_AMOUNT = 99;
 	private TiledMap map;
 	private ArrayList<Sprite> units;
 	
@@ -30,7 +32,8 @@ public class Map {
 	 * 
 	 */
 	private void readFromCSV() {
-		try (BufferedReader br = new BufferedReader(new FileReader(RESOURCES_PATH))) {
+		try (BufferedReader br = 
+				new BufferedReader(new FileReader(RESOURCES_PATH))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		        String[] values = line.split(COMMA_DELIMITER);
@@ -72,7 +75,8 @@ public class Map {
 	 */
 	public boolean isPositionFree(double x, double y) {
 		int tileId = map.getTileId(worldXToTileX(x), worldYToTileY(y), 0);
-		return !Boolean.parseBoolean(map.getTileProperty(tileId, SOLID_PROPERTY, "false"));
+		return !Boolean.parseBoolean(map.getTileProperty(tileId, 
+								SOLID_PROPERTY, "false"));
 	}
 	
 	public double getMapWidth() {
@@ -134,13 +138,24 @@ public class Map {
 	public void update(Input input, int delta) {
 		boolean pressedLeft = input.isMousePressed(Input.MOUSE_LEFT_BUTTON);
 		boolean pressedRight = input.isMousePressed(Input.MOUSE_RIGHT_BUTTON);
-		double globalX = Camera.getInstance().screenXToGlobalX(input.getMouseX());
-		double globalY = Camera.getInstance().screenYToGlobalY(input.getMouseY());
+		double globalX = 
+				Camera.getInstance().screenXToGlobalX(input.getMouseX());
+		double globalY = 
+				Camera.getInstance().screenYToGlobalY(input.getMouseY());
 		boolean newSelect = false;
 		
 		// check if there is any object in the selection distance
 		if (pressedLeft) {
 			newSelect = selectObject(globalX, globalY);
+		}
+		
+		// OMG!! YOU ARE CHEATING!!
+		if (input.isKeyPressed(Input.KEY_0)) {
+			World.getInstance().addMetal(CHEAT_AMOUNT);
+		}
+		
+		if (input.isKeyPressed(Input.KEY_9)) {
+			World.getInstance().addMaxCarry(CHEAT_AMOUNT);
 		}
 		
 		for (int i=0; i<units.size(); i++) {
@@ -155,21 +170,37 @@ public class Map {
 			}
 			
 			// mine resources && submit resources
-			for (Sprite other:units) {
-				if ((other instanceof Resources) && (s instanceof Engineer)) {
-					if (withInDistance(other.getX(), s.getX(), other.getY(), s.getY(), 32)) {
-						((Engineer) s).mine((Resources) other, delta);
+			if (s instanceof Engineer) {
+				for (Sprite other:units) {
+					if (other instanceof Resources) {
+						if (withInDistance(other.getX(), s.getX(),
+								other.getY(), s.getY(), DISTANCE_THRESHOLD)) {
+							((Engineer) s).mine((Resources) other, delta);
+						}
+					}
+					if (other instanceof CommandCentre) {
+						
 					}
 				}
-				if ((other instanceof CommandCentre) && (s instanceof Engineer)) {
-					
-				}
 			}
+			
 
 			// remove resources if empty
 			if (s instanceof Resources) {
 				if (((Resources) s).getCurrentAmount() <= 0) {
 					units.remove(i);
+				}
+			}
+			
+			// active pylon if near by
+			if (s instanceof Pylon && !((Pylon) s).isActive()) {
+				for (Sprite other:units) {
+					if (other instanceof Movable) {
+						if (withInDistance(other.getX(), s.getX(), 
+								other.getY(), s.getY(), DISTANCE_THRESHOLD)) {
+							((Pylon) s).becomeActive();
+						}
+					}
 				}
 			}
 
@@ -185,7 +216,8 @@ public class Map {
 	 * @param d
 	 * @return
 	 */
-	private boolean withInDistance(double x1, double x2, double y1, double y2, int d) {
+	private boolean withInDistance(double x1, double x2, 
+									double y1, double y2, int d) {
 		return (Math.abs(x1 - x2) <= d) && (Math.abs(y1 - y2) <=d);
 	}
 

@@ -2,13 +2,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-/**
- * This class should be used to contain all the different objects in your game world, and schedule their interactions.
- * 
- * You are free to make ANY modifications you see fit.
- * These classes are provided simply as a starting point. You are not strictly required to use them.
- */
 public class World {
+	
+	private static final int INIT_MAX_CARRY = 2;
 
 	private Map map;
 	
@@ -18,6 +14,7 @@ public class World {
 	
 	private int collectedMetal;
 	private int collectedUnobtainium;
+	private int maxCarry;
 	
 	private World() {
 		try {
@@ -29,8 +26,25 @@ public class World {
 		textDisplay = TextDisplayer.getInstance();
 		collectedMetal = 0;
 		collectedUnobtainium = 0;
+		maxCarry = INIT_MAX_CARRY;
 	}
 	
+	/** Get carry max number of resources
+	 * @return
+	 */
+	public int getMaxCarry() {
+		return maxCarry;
+	}
+
+	/** Set carry max number of resources
+	 * @return
+	 */
+	public void addMaxCarry(int add) {
+		this.maxCarry = maxCarry + add;
+	}
+
+
+
 	/** Get world's instance
 	 * @return
 	 */

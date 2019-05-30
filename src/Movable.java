@@ -47,7 +47,7 @@ public abstract class Movable extends Selectable {
 	 * @return
 	 */
 	public double distance(double x1, double y1, double x2, double y2) {
-		return (double)Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+		return (double)Math.sqrt((x2 - x1)*(x2 - x1)+(y2 - y1)*(y2 - y1));
 	}
 
 	/** Move to the target
@@ -59,11 +59,13 @@ public abstract class Movable extends Selectable {
 			resetTarget();
 		} else {
 			// Calculate the appropriate x and y distances
-			double theta = Math.atan2(this.getTargetY() - this.getY(), this.getTargetX() - this.getX());
+			double theta = Math.atan2(this.getTargetY() - this.getY(), 
+										this.getTargetX() - this.getX());
 			double dx = (double)Math.cos(theta) * delta * speed;
 			double dy = (double)Math.sin(theta) * delta * speed;
 			// Check the tile is free before moving; otherwise, we stop moving
-			if (World.getInstance().getMap().isPositionFree(this.getX() + dx, this.getY() + dy)) {
+			if (World.getInstance().getMap().isPositionFree(this.getX() + dx, 
+										this.getY() + dy)) {
 				this.setX(this.getX() + dx);
 				this.setY(this.getY() + dy);
 			} else {
@@ -77,7 +79,8 @@ public abstract class Movable extends Selectable {
 	 * @return
 	 */
 	public boolean closeToObject(double speed) {
-		return distance(this.getX(), this.getY(), this.getTargetX(), this.getTargetY()) <= speed;
+		return distance(this.getX(), this.getY(), 
+						this.getTargetX(), this.getTargetY()) <= speed;
 	}
 	
 	/** If current position is close enough to a point

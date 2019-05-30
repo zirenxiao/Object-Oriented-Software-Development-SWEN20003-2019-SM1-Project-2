@@ -10,8 +10,7 @@ public class Engineer extends Movable {
 	
 	private double mineX;
 	private double mineY;
-	
-	private int maxCarry;
+
 	private int currentCarryMetal;
 	private int currentCarryUnobtainium;
 	
@@ -23,14 +22,18 @@ public class Engineer extends Movable {
 	
 	public Engineer(double x, double y) {
 		super(PATH, x, y);
-		maxCarry = 2;
+		this.setSelectOption("1- Stop slacking and get down to work!");
 		currentCarryMetal = 0;
 		currentCarryUnobtainium = 0;
 	}
 
 	@Override
 	public void update(Input input, int delta) {
-		// TODO Auto-generated method stub
+		if (this.isSelected()) {
+			if (input.isKeyPressed(Input.KEY_1)) {
+				this.findNearestMetallMine();
+			}
+		}
 		move(delta, SPEED);
 		if (goToSubmit && closeToObject(SPEED)) {
 			if (closeToObject(SPEED, c.getX(), c.getY())) {
@@ -126,6 +129,7 @@ public class Engineer extends Movable {
 			if (s instanceof CommandCentre) {
 				double d = this.distance(getX(), getY(), s.getX(), s.getY());
 				if (d < smallestDist) {
+					smallestDist = d;
 					c = (CommandCentre) s;
 				}
 			}
@@ -134,13 +138,36 @@ public class Engineer extends Movable {
 		this.setTargetY(c.getY());
 	}
 	
+	/** Find the nearest metal mine and
+	 * set the position as the target
+	 * 
+	 */
+	private void findNearestMetallMine() {
+		double smallestDist = Integer.MAX_VALUE;
+		MetalMine m = null;
+		for (Sprite s:World.getInstance().getMap().getUnits()) {
+			if (s instanceof MetalMine) {
+				double d = this.distance(getX(), getY(), s.getX(), s.getY());
+				if (d < smallestDist) {
+					smallestDist = d;
+					m = (MetalMine) s;
+				}
+			}
+		}
+		if (m != null) {
+			this.setTargetX(m.getX());
+			this.setTargetY(m.getY());
+		}
+	}
+	
 	
 	
 	/** If current carry more than the maximum
 	 * @return
 	 */
 	private boolean reachMaxCarry() {
-		return currentCarryMetal + currentCarryUnobtainium >= maxCarry;
+		return currentCarryMetal + currentCarryUnobtainium 
+				>= World.getInstance().getMaxCarry();
 	}
 
 }

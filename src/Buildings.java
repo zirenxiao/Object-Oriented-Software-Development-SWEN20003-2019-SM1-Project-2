@@ -26,7 +26,11 @@ public abstract class Buildings extends Selectable {
 	public void render(Graphics g) {
 		super.render(g);
 		if (th.getTrainRemainTime() != TrainHandler.NOT_TRAINING) {
-			this.drawString(g, "Time:"+String.valueOf(th.getTrainRemainTime())+"\nTotal:"+String.valueOf(th.getTrainNumber()));
+			this.drawString(g, 
+					"Time:" 
+			        + String.valueOf(th.getTrainRemainTime()) 
+			        + "\nTotal:"
+			        + String.valueOf(th.getTrainNumber()));
 		}
 	}
 

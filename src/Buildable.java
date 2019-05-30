@@ -10,7 +10,8 @@ public class Buildable extends Movable {
 	private boolean isBuilding = false;
 	private double speed;
 	
-	public Buildable(String path, double x, double y, int buildTime, double speed) {
+	public Buildable(String path, double x, double y, 
+			int buildTime, double speed) {
 		super(path, x, y);
 		th = new TrainHandler(buildTime);
 		this.speed = speed;
@@ -33,7 +34,9 @@ public class Buildable extends Movable {
 	public void render(Graphics g) {
 		super.render(g);
 		if (th.getTrainRemainTime() != TrainHandler.NOT_TRAINING) {
-			this.drawString(g, "Time:"+String.valueOf(th.getTrainRemainTime()));
+			this.drawString(g, 
+					"Time:"
+			        + String.valueOf(th.getTrainRemainTime()));
 		}
 	}
 

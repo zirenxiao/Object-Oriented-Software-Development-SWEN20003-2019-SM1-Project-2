@@ -33,7 +33,8 @@ public class TrainHandler {
 	 * @param cost
 	 * @param costType
 	 */
-	public void handle(Input input, int key, Sprite generate, int cost, ResourcesType costType) {
+	public void handle(Input input, int key, Sprite generate, 
+						int cost, ResourcesType costType) {
 		if (input.isKeyPressed(key)) {
 			boolean costSuccess = false;
 			if (costType == ResourcesType.METAL) {

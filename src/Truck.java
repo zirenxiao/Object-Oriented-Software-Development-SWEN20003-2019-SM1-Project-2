@@ -20,7 +20,10 @@ public class Truck extends Buildable {
 	@Override
 	public void update(Input input, int delta) {
 		if (this.isSelected() && !super.isBuilding()) {
-			super.getTrainHandler().handle(input, Input.KEY_1, new CommandCentre(getX(), getY()), 0, ResourcesType.METAL);
+			super.getTrainHandler().handle(input, Input.KEY_1, 
+					new CommandCentre(getX(), getY()), 
+					0, 
+					ResourcesType.METAL);
 		}
 		if (super.isBuilding()) {
 			used = true;

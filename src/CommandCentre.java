@@ -5,10 +5,16 @@ import org.newdawn.slick.Input;
 public class CommandCentre extends Buildings {
 	
 	private static final String PATH = "assets/buildings/command_centre.png";
+	
+	private static final int KEY_1_BUILD_COST = 5;
+	private static final int KEY_2_BUILD_COST = 10;
+	private static final int KEY_3_BUILD_COST = 20;
 
 	public CommandCentre(double x, double y) {
 		super(PATH, x, y);
-		this.setSelectOption("1- Create Scout\n2- Create Builder\n3- Create Engineer\n");
+		this.setSelectOption("1- Create Scout\n"
+				+ "2- Create Builder\n"
+				+ "3- Create Engineer\n");
 	}
 
 	/** Key 1 - Scout
@@ -21,9 +27,12 @@ public class CommandCentre extends Buildings {
 		// TODO Auto-generated method stub
 		TrainHandler th = super.getTrainHandler();
 		if (this.isSelected()) {
-			th.handle(input, Input.KEY_1, new Scout(getX(), getY()), 5, ResourcesType.METAL);
-			th.handle(input, Input.KEY_2, new Builder(getX(), getY()), 10, ResourcesType.METAL);
-			th.handle(input, Input.KEY_3, new Engineer(getX(), getY()), 20, ResourcesType.METAL);
+			th.handle(input, Input.KEY_1, new Scout(getX(), getY()), 
+					KEY_1_BUILD_COST, ResourcesType.METAL);
+			th.handle(input, Input.KEY_2, new Builder(getX(), getY()),
+					KEY_2_BUILD_COST, ResourcesType.METAL);
+			th.handle(input, Input.KEY_3, new Engineer(getX(), getY()), 
+					KEY_3_BUILD_COST, ResourcesType.METAL);
 		}
 		super.update(input, delta);
 	}
